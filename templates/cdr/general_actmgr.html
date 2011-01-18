@@ -1,0 +1,48 @@
+<form name="cdralertmgr" method="post" action="{$FORM_ACTION}" >
+<table cellpadding="1" cellspacing="0" class="showborder">
+        <tr class="showborder_head">
+                <th width="250px">{xl t='Title'}</th>
+                <th width="40px">&nbsp;</th>
+                <th width="10px">{xl t='Active'}</th>
+                <th width="40px">&nbsp;</th>
+                <th width="10px">{xl t='Passive'}</th>
+                <th width="40px">&nbsp;</th>
+                <th width="10px">{xl t='Reminders'}</th>
+                <th></th>
+        </tr>
+        {foreach from=$rules item=rule name=ruleloop}
+        <tr height="22">
+                <td>{$rule->get_rule()}</td>
+				<td>&nbsp;</td>
+                {if $rule->active_alert_flag() eq "1"}
+                <td><input type="checkbox" name="active[{$smarty.foreach.ruleloop.iteration-1}]" checked="yes"></td>
+                {else}
+                <td><input type="checkbox" name="active[{$smarty.foreach.ruleloop.iteration-1}]" ></td>
+				{/if}                
+				<td>&nbsp;</td>
+                {if $rule->passive_alert_flag() eq "1"}
+                <td><input type="checkbox" name="passive[{$smarty.foreach.ruleloop.iteration-1}]" checked="yes"></td>
+                {else}
+                <td><input type="checkbox" name="passive[{$smarty.foreach.ruleloop.iteration-1}]"></td>
+				{/if}                
+				<td>&nbsp;</td>
+                {if $rule->patient_reminder_flag() eq "1"}
+                <td><input type="checkbox" name="reminder[{$smarty.foreach.ruleloop.iteration-1}]" checked="yes"></td>
+                {else}
+                <td><input type="checkbox" name="reminder[{$smarty.foreach.ruleloop.iteration-1}]"></td>
+				{/if}                
+                <td><input style="display:none" name="id[{$smarty.foreach.ruleloop.iteration-1}]" value="{$rule->get_id()}" /></td>
+        </tr>
+        {foreachelse}
+        <tr class="center_display">
+                <td colspan="5">{xl t='No Clinical Desicion Rules Found'}</td>
+        </tr>
+        {/foreach}
+
+</table>
+<br>
+<a href="javascript:document.cdralertmgr.submit();" class="css_button"><span>{xl t='Save'}</span></a><a href="javascript:document.cdralertmgr.reset();" class="css_button" ><span>{xl t='Cancel'}</span></a>
+<input type="hidden" name="process" value="{$PROCESS}" />
+</form>
+
+

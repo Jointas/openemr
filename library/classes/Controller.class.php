@@ -84,7 +84,7 @@ class Controller extends Smarty {
                $c_name = preg_replace("/[^A-Za-z0-9_]/","",array_pop($args));
                $parts = split("_",$c_name);
                $name = "";
-
+               
                foreach($parts as $p) {
                        $name .= ucfirst($p);
                }
@@ -97,17 +97,18 @@ class Controller extends Smarty {
                        echo "Unable to load controller $name\n, please check the first argument supplied in the URL and try again";
                        exit;
                }
-
+               
                $obj_name = "C_" . $c_name;
                $c_obj = new $obj_name();
 
                if (empty ($c_action)) {
                        $c_action = "default";
                }
-
+               
                $c_obj->_current_action = $c_action;
                $args_array = array();
-
+               
+               
                foreach ($args as $arg) {
                        $arg = preg_replace("/[^A-Za-z0-9_]/","",$arg);
                        //this is a workaround because call user func does funny things with passing args if they have no assigned value
@@ -145,7 +146,7 @@ class Controller extends Smarty {
                                }
                }
 
-
+               
                return $output;
        }
 

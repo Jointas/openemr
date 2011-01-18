@@ -21,13 +21,17 @@ require_once("$srcdir/reminders.php");
 <head>
 <?php html_header_show();?>
 <link rel="stylesheet" href="<?php echo $css_header;?>" type="text/css">
+<link rel="stylesheet" type="text/css" href="../../../library/js/fancybox/jquery.fancybox-1.2.6.css" media="screen" />
 <style type="text/css">@import url(../../../library/dynarch_calendar.css);</style>
 <script type="text/javascript" src="../../../library/dialog.js"></script>
 <script type="text/javascript" src="../../../library/textformat.js"></script>
 <script type="text/javascript" src="../../../library/dynarch_calendar.js"></script>
 <?php include_once("{$GLOBALS['srcdir']}/dynarch_calendar_en.inc.php"); ?>
 <script type="text/javascript" src="../../../library/dynarch_calendar_setup.js"></script>
-<script type="text/javascript" src="<?php echo $GLOBALS['webroot']; ?>/library/js/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/common.js"></script>
+<script type="text/javascript" src="<?php echo $GLOBALS['webroot'] ?>/library/js/jquery.1.3.2.js"></script>
+<script type="text/javascript" src="../../../library/js/fancybox/jquery.fancybox-1.2.6.js"></script>
+
 
 <script LANGUAGE="JavaScript">
 var mypcc = '<?php echo $GLOBALS['phone_country_code'] ?>';
@@ -58,6 +62,26 @@ $update_rem_log = update_reminders('', $patient_id);
   function sel_patient() {
     dlgopen('../../main/calendar/find_patient_popup.php', '_blank', 500, 400);
   }
+
+	   
+  $(document).ready(function(){
+
+	    // fancy box
+	    enable_modals();
+
+	    tabbify();
+
+        $(".cdr_modal").fancybox( {
+            'overlayOpacity' : 0.0,
+            'showCloseButton' : true,
+            'frameHeight' : 500,
+            'frameWidth' : 800,
+	    	'centerOnScroll' : false,
+	    });
+
+	});
+
+  
 </script>
 
 <body class='body_top'>
@@ -177,6 +201,9 @@ else {
                 <?php } ?>
                 <a href='patient_reminders.php?patient_id=<?php echo $patient_id; ?>&mode=<?php echo $mode; ?>' class='css_button' onclick='top.restoreSession()'>
                   <span><?php echo htmlspecialchars( xl('Refresh'), ENT_NOQUOTES); ?></span>
+                </a>
+                <a href='<?php echo $GLOBALS['webroot']?>/controller.php?cdr_alert_manager&edit&id&alert=patient&pid=<?php echo $patient_id; ?>'  class='iframe css_button cdr_modal' onclick='top.restoreSession()'/>
+                  <span><?php echo htmlspecialchars( xl('Edit'), ENT_NOQUOTES); ?></span>
                 </a>
               </div>
             </td>

@@ -5,6 +5,7 @@ require_once($GLOBALS['fileroot'] ."/library/classes/Pharmacy.class.php");
 require_once($GLOBALS['fileroot'] ."/library/classes/InsuranceCompany.class.php");
 require_once($GLOBALS['fileroot'] ."/library/classes/Provider.class.php");
 require_once($GLOBALS['fileroot'] ."/library/classes/InsuranceNumbers.class.php");
+require_once($GLOBALS['fileroot'] ."/library/classes/CdrActivationManager.class.php");
 
 class C_PracticeSettings extends Controller {
 
@@ -23,7 +24,24 @@ class C_PracticeSettings extends Controller {
 		$this->assign("display",$display);
 		$this->display($GLOBALS['template_dir'] . "practice_settings/" . $this->template_mod . "_list.html");
 	}
+	
+	function cdr_activation_manager_action($arg) {
+		$c = new Controller();
 
+		//this dance is so that the controller system which only cares about the name part of the first two arguments get what it wants
+		//and the rest gets passed as normal argument values, really this all goes back to workarounds for problems with call_user_func
+		//and value passing
+
+		$fga = func_get_args();
+
+		$fga = array_slice($fga,1);
+		$args = array_merge(array("cdr_activation_manager" => "",$arg => ""),$fga);
+
+		$display =  $c->act($args);
+		$this->assign("ACTION_NAME", xl("Clinical Desicion Rules Activation Manager") );
+		$this->default_action($display);
+	}
+	
 	function pharmacy_action($arg) {
 		$c = new Controller();
 
