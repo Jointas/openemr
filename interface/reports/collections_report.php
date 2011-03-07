@@ -302,7 +302,7 @@ function checkAll(checked) {
 
 <table>
  <tr>
-  <td width='610px'>
+  <td width='80%'>
 	<div style='float:left'>
 
 	<table class='text'>
