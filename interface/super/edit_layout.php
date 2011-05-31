@@ -49,6 +49,7 @@ $datatypes = array(
   "26" => xl("List box w/add"),
   "27" => xl("Radio buttons"),
   "28" => xl("Lifestyle status"), // add for smoking status task
+  "29" => xl("History w/Notes"),
   "31" => xl("Static Text"),
   "32" => xl("Smoking Status"),
   "33" => xl("Race and Ethnicity"),
@@ -402,7 +403,8 @@ function writeFieldLine($linedata) {
     if ($linedata['data_type'] == 2 || $linedata['data_type'] == 3 ||
       $linedata['data_type'] == 21 || $linedata['data_type'] == 22 ||
       $linedata['data_type'] == 23 || $linedata['data_type'] == 25 ||
-      $linedata['data_type'] == 27 || $linedata['data_type'] == 28)
+      $linedata['data_type'] == 27 || $linedata['data_type'] == 28 ||
+      $linedata['data_type'] == 29 )
     {
       echo "<input type='text' name='fld[$fld_line_no][length]' value='" .
         htmlspecialchars($linedata['fld_length'], ENT_QUOTES) .
@@ -418,7 +420,8 @@ function writeFieldLine($linedata) {
     if ($linedata['data_type'] ==  1 || $linedata['data_type'] == 21 ||
       $linedata['data_type'] == 22 || $linedata['data_type'] == 23 ||
       $linedata['data_type'] == 25 || $linedata['data_type'] == 26 ||
-      $linedata['data_type'] == 27 || $linedata['data_type'] == 33)
+      $linedata['data_type'] == 27 || $linedata['data_type'] == 29 ||
+      $linedata['data_type'] == 33)
     {
       echo "<input type='text' name='fld[$fld_line_no][list_id]' value='" .
         htmlspecialchars($linedata['list_id'], ENT_QUOTES) . "'".
